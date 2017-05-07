@@ -45,7 +45,8 @@ echo $x;
 
 
 <p>Uma funcionalidade nativa interessante em Go é o retorno de múltiplos valores em uma função,
-coisa que não é possível fazer na linguagem C. Em C# é possível com o uso de uma biblioteca.</p>
+coisa que não é possível fazer na linguagem C. Em C# é possível com o uso de uma biblioteca.
+Em comparação com C# podemos notar que go perde em expressividade.</p>
 
 ```go
 package main
@@ -63,6 +64,8 @@ func main() {
     //Retorna 7
 }
 ```
+Código em C#:
+
 ```c#
 using System;
 
@@ -70,7 +73,7 @@ namespace ConsoleApplication1 {
     public class Program {
         static void Main(string[] args) {
 
-             Tuple<string, int> dados = Tuple.Create("Olá Mundo", 50);
+            Tuple<string, int> dados = Tuple.Create("Olá Mundo", 50);
             Console.WriteLine(dados);
             //retorna ("Olá mundo", 50)
             Console.ReadKey();
@@ -103,3 +106,16 @@ func main() {
  
 }
 ```
+
+
+# Conclusão
+
+Go é uma linguagem focada em concorrência, então seu uso é indicado para projetos que necessitem de sistemas distribuídos.
+O ideal é analisar os requisitos de cada sistema para decidir a linguagem usada, porém Go vem se popularizando bastante ao passar dos anos
+e vem sendo uma ótima alternativa  para quem busca uma linguagem nova e com bom desempenho.
+
+# Referências 
+
+<https://golang.org/>
+<https://imasters.com.br/linguagens/trabalhando-com-go-golang-a-linguagem-do-google/>
+<http://drizin.io/tag/golang/>
