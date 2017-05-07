@@ -22,3 +22,22 @@ fmt.Printf("x é do tipo %T\n", x)
 
 //Retorna "x é do tipo int"
 ```
+Porém, diferentemente de outras linguagens como PHP, não podemos reutilizar essa variável com um
+valor de outro tipo.
+
+```go
+x := 50
+x = "Olá mundo"
+fmt.Printf(x)
+//Retorna cannot use "Olá" (type string) as type int in assignment
+```
+
+Em PHP:
+
+```php
+$x = 50;
+$x = "Olá";
+echo $x;
+
+//Retorna "olá"
+```
