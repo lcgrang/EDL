@@ -42,3 +42,64 @@ echo $x;
 
 //Retorna "olá"
 ```
+
+
+<p>Uma funcionalidade nativa interessante em Go é o retorno de múltiplos valores em uma função,
+coisa que não é possível fazer na linguagem C. Em C# é possível com o uso de uma biblioteca.</p>
+
+```go
+package main
+
+import "fmt"
+
+func valores() (int, int) {
+    return 3, 7
+}
+func main() {
+    a, b := valores()
+    fmt.Println(a)
+    //Retorna 3
+    fmt.Println(b)
+    //Retorna 7
+}
+```
+```c#
+using System;
+
+namespace ConsoleApplication1 {
+    public class Program {
+        static void Main(string[] args) {
+
+             Tuple<string, int> dados = Tuple.Create("Olá Mundo", 50);
+            Console.WriteLine(dados);
+            //retorna ("Olá mundo", 50)
+            Console.ReadKey();
+
+        }
+    }
+}
+```
+
+<p>Em Go encontramos suporte à closures.<p>
+
+```go
+func intSeq() func() int {
+    i := 0
+    return func() int {
+        i += 1
+        return i
+    }
+}
+
+func main() {
+    nextInt := intSeq()
+  
+    fmt.Println(nextInt())
+    //retorna 1
+    fmt.Println(nextInt())
+    //retorna 2
+    fmt.Println(nextInt())
+    //retorna 3
+ 
+}
+```
