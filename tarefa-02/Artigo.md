@@ -42,18 +42,16 @@ echo $x;
 
 //Retorna "olá"
 ```
-Em uma breve comparação com Python, utilizando um código que retorna o fatorial de um número passado, podemos notar que Go possui uma escrita e legibilidade levemente melhor.
+Em uma breve comparação com Python, utilizando um código que retorna o fatorial de um número passado, podemos notar que Go possui uma escrita muito parecida e legibilidade levemente melhor.
 
 Go:
 ```go
-package fatorial
-
-func Fatorial(value int) (int) {
-    if value == 1 {
-        return 1
-    } else {
-        return value * Fatorial(value-1)
-    }
+func Fatorial(value int) {
+	aux := 1
+	for i := 1; i <= value; i++ {
+		aux = aux * i
+	}
+	fmt.Println(aux)
 }
 ```
 
