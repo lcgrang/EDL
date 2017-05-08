@@ -107,6 +107,36 @@ func main() {
 }
 ```
 
+<p>O maior diferencial de Go é o recurso de concorrência nativa. Para isso existem funções chamdas ´Goroutines´, que são funções
+executadas simultaneamente com outras. Essas funções trocam informações através de channels, evitando o compartilhamento de memória.</p>
+
+Exemplo de código usando goroutine:
+
+```go
+package main
+import "fmt"
+func f(from string) {
+    for i := 0; i < 3; i++ {
+        fmt.Println(from, ":", i)
+    }
+}
+func main() {
+
+    f("direto")
+
+    //Ao invocarmos uma goroutine a função não irá esperar a execução
+    //da função anterior acabar.
+    go f("goroutine")
+
+    go func(msg string) {
+        fmt.Println(msg)
+    }("indo")
+
+    var input string
+    fmt.Scanln(&input)
+    fmt.Println("pronto")
+}
+```
 
 # Conclusão
 
@@ -117,5 +147,7 @@ e vem sendo uma ótima alternativa  para quem busca uma linguagem nova e com bom
 # Referências 
 
 <https://golang.org/>
+
 <https://imasters.com.br/linguagens/trabalhando-com-go-golang-a-linguagem-do-google/>
+
 <http://drizin.io/tag/golang/>
