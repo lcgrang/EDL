@@ -42,7 +42,31 @@ echo $x;
 
 //Retorna "olá"
 ```
+Em uma breve comparação com Python, utilizando um código que retorna o fatorial de um número passado, podemos notar que Go possui uma escrita e legibilidade levemente melhor.
 
+Go:
+```go
+package fatorial
+
+func Fatorial(value int) (int) {
+    if value == 1 {
+        return 1
+    } else {
+        return value * Fatorial(value-1)
+    }
+}
+```
+
+Python:
+```python
+def Fatorial(num):
+	aux = 1
+	for x in xrange(2,num+1):
+		aux = aux * x
+	return aux
+
+print Fatorial(5)
+```
 
 <p>Uma funcionalidade nativa interessante em Go é o retorno de múltiplos valores em uma função,
 coisa que não é possível fazer na linguagem C. Em C# é possível com o uso de uma biblioteca.
@@ -151,3 +175,5 @@ e vem sendo uma ótima alternativa  para quem busca uma linguagem nova e com bom
 <https://imasters.com.br/linguagens/trabalhando-com-go-golang-a-linguagem-do-google/>
 
 <http://drizin.io/tag/golang/>
+
+<https://blog.codeshare.com.br/golang-routines-e-channels/>
