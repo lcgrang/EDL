@@ -31,8 +31,6 @@ function love.load()
 -- Trabalho-08 coroutine e closure
     -- Inicia Criação de um bloco Extra que irá funcionar como auxílio na destruição dos blocos inimigos
     -- quando o player atingir certa pontuação.
-    -- Por enquanto está aparecendo durante toda a execução e não verifica colisões.
-    -- Precisa ser muito melhorado. 
 
     function criaNovoBloco()
         local posx = 650/2
