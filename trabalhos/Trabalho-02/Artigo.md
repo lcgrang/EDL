@@ -42,33 +42,11 @@ echo $x;
 
 //Retorna "olá"
 ```
-Em uma breve comparação com Python, utilizando um código que retorna o fatorial de um número passado, podemos notar que Go possui uma escrita muito parecida e legibilidade levemente melhor.
-
-Go:
-```go
-func Fatorial(value int) {
-	aux := 1
-	for i := 1; i <= value; i++ {
-		aux = aux * i
-	}
-	fmt.Println(aux)
-}
-```
-
-Python:
-```python
-def Fatorial(num):
-	aux = 1
-	for x in xrange(2,num+1):
-		aux = aux * x
-	return aux
-
-print Fatorial(5)
-```
-
-<p>Uma funcionalidade nativa interessante em Go é o retorno de múltiplos valores em uma função,
-coisa que não é possível fazer na linguagem C. Em C# é possível com o uso de uma biblioteca.
-Em comparação com C# podemos notar que go perde em expressividade.</p>
+### Writability x Readability
+<p>Uma funcionalidade nativa interessante em Go é o retorno de múltiplos valores em uma função, também conhecida
+como a estrutura de Tupla. Em C# é possível criar tuplas com o auxílio de uma biblioteca.
+Em Go, se escreve pouco, porém no código em C# fica um pouco mais clara a ideia passada pelo código.
+</p>
 
 ```go
 package main
@@ -105,6 +83,74 @@ namespace ConsoleApplication1 {
 }
 ```
 
+Em uma breve comparação com Python, utilizando um código que retorna o fatorial de um número passado, podemos notar que ambas possuem uma escrita e legibilidade bem parecidas.
+
+Go:
+```go
+func Fatorial(value int) {
+	aux := 1
+	for i := 1; i <= value; i++ {
+		aux = aux * i
+	}
+	fmt.Println(aux)
+}
+```
+
+Python:
+```python
+def Fatorial(num):
+	aux = 1
+	for x in xrange(2,num+1):
+		aux = aux * x
+	return aux
+
+print Fatorial(5)
+```
+
+### Expressividade
+<p>Ainda em comparação com Pyhon, podemos utilizar trechos de código para criação de loop nas duas linguagens.
+Como vemos a seguir, em Go, há diversas maneiras diferentes de se criar um loop atravéns da instrução 'for', porém
+a instrução 'while' de python, não existe em Go. Para se criar um loop semanticamente parecido com o 'while' em Go, 
+é necessario utilizar uma das modificações de 'for', de uma forma sintaticamente diferente. 
+Nesse ponto, podemos dizer que Go é menos expressiva que Python.
+</p>
+
+
+```go
+    //Declaração normal do loop for, muito parecido com outras linguagens
+    sum := 0
+	for i := 0; i < 10; i++ {
+		sum += i
+	}
+	fmt.Println(sum)
+
+    // Podemos criar o loop sem passar a declaração inicial e final
+	sum := 1
+	for ; sum < 100; {
+		sum += sum
+	}
+	fmt.Println(sum)
+
+    // O for funciona da mesma forma que o While em Python
+    count := 1
+	for sum < 100 {
+		sum += sum
+	}
+	fmt.Println("Good bye!")
+```
+
+```python
+count = 1
+while (count < 100):
+   count = count + 1
+
+print "Good bye!"
+
+for x in xrange(2,num+1):
+		aux = aux * x
+	return aux
+```
+
 <p>Em Go encontramos suporte à closures.<p>
 
 ```go
@@ -130,7 +176,7 @@ func main() {
 ```
 
 <p>O maior diferencial de Go é o recurso de concorrência nativa. Para isso existem funções chamdas ´Goroutines´, que são funções
-executadas simultaneamente com outras. Essas funções trocam informações através de channels, evitando o compartilhamento de memória.</p>
+executadas de forma concorrente com outras. Essas funções trocam informações através de channels, evitando o compartilhamento de memória. O conceito de goroutine é parecido com de Threads.</p>
 
 Exemplos de código usando goroutine:
 
