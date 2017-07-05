@@ -17,7 +17,9 @@ function love.load()
     delayInimigo = 0.5
     tempoCriaInimigo = delayInimigo
     inimigos = {}
-   
+    -- trabalho 06
+    -- Inimigos = {} é uma estrutura de tipo array que irá conter todos os blocos inimigos criados em tempo de execução.
+
     SIM = 1
     NAO = 0
     aux = 0
@@ -27,12 +29,6 @@ function love.load()
     perdas = 0
 
     
-
--- Trabalho-08 coroutine e closure
-    -- Inicia Criação de um bloco Extra que irá funcionar como auxílio na destruição dos blocos inimigos
-    -- quando o player atingir certa pontuação.
-    -- Por enquanto está aparecendo durante toda a execução e não verifica colisões.
-    -- Precisa ser muito melhorado. 
 
     function criaNovoBloco()
         local posx = 650/2
@@ -62,7 +58,8 @@ function love.load()
         end
 
         local bloco = {
-            
+            -- trabalho 06
+            -- bloco é um exemplo de registro, sendo uma estrutura que contém o acesso aos dados por meio de funções.
         coroutineBloco = coroutine.create(moveBloco),
         
         getX = function()
@@ -76,8 +73,12 @@ function love.load()
         getPos = function()
             return posx, posy
         end,
+        -- Trabalho 06
+        -- Função getPos é um exemplo de Tupla
         revive = function()
             isAlive = SIM
+            -- Trabalho 06
+            -- SIM é um exemplo de enum
         end,
 
         morre = function()
@@ -87,6 +88,7 @@ function love.load()
         getIsAlive = function()
             return isAlive
         end
+
         }
 
         return bloco
