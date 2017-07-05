@@ -188,5 +188,9 @@ function colisao()
                 perdas = 0
             end
         end
+
+        if checaColisao(inimigo.body:getX(), inimigo.body:getY(), 50, 30, blocoExtra:getX(), blocoExtra:getY(), 50, 30) then
+            table.remove(inimigos, i)
+        end
     end
 end
