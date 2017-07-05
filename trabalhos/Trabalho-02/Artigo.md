@@ -132,7 +132,9 @@ func main() {
 <p>O maior diferencial de Go é o recurso de concorrência nativa. Para isso existem funções chamdas ´Goroutines´, que são funções
 executadas simultaneamente com outras. Essas funções trocam informações através de channels, evitando o compartilhamento de memória.</p>
 
-Exemplo de código usando goroutine:
+Exemplos de código usando goroutine:
+
+Exemplo 1:
 
 ```go
 package main
@@ -160,6 +162,44 @@ func main() {
 }
 ```
 
+Exemplo 2:
+
+```go
+package main
+
+import{
+    "fmt"
+    "time"
+}
+func main(){
+    /*
+        Nesse exemplo, é feita uma chamada recursiva para calcular um número de fibonacci
+        Esse tipo de função é muito lenta, então é criada uma goroutine que exibe
+        uma pequena animação enquanto a função recursiva executa
+    */
+    go spinner(1000 * time.Milisecond)
+    const n = 45
+    fibN := fib(n)
+    fmt.Printf("\rFibonacci(%d) = %d\n", n, fibN)
+}
+
+func spinner(delay time.Duration){
+    for{
+        for _, r := range `-\|/`{
+            fmt.Printf("\r%c", r)
+            time.Sleep(delay)
+        }
+    }
+}
+
+func fib(x int) int {
+    if x < 2 {
+        return x
+    }
+    return fib(x-1) + fib(x-2)
+}
+```
+
 # Conclusão
 
 Go é uma linguagem focada em concorrência, então seu uso é indicado para projetos que necessitem de sistemas distribuídos.
@@ -167,6 +207,8 @@ O ideal é analisar os requisitos de cada sistema para decidir a linguagem usada
 e vem sendo uma ótima alternativa  para quem busca uma linguagem nova e com bom desempenho.
 
 # Referências 
+
+- Donavan, Alan A. A.; Kerninghan, Brian W.; A Linguagem de programação Go;
 
 <https://golang.org/>
 
