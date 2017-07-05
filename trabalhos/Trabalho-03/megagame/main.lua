@@ -1,5 +1,8 @@
+
+
 larguraDaTela = love.graphics.getWidth()
 alturaDaTela = love.graphics.getHeight()
+
 function love.load()
     love.physics.setMeter(64)
 
@@ -18,6 +21,58 @@ function love.load()
     pontos = 0
     bonus = 0
     perdas = 0
+
+    
+
+    -- Trabalho-08 coroutine e closure
+    -- Inicia Criação de um bloco Extra que irá funcionar como auxílio na destruição dos blocos inimigos
+    -- quando o player atingir certa pontuação.
+    -- Por enquanto está aparecendo durante toda a execução e não verifica colisões.
+    -- Precisa ser muito melhorado. 
+
+    function criaNovoBloco()
+        local posx = 650/2
+        local posy = 650/2
+
+        function moveBloco(dt)
+            while true do
+                for i=1, 5 do
+                    posx = posx + 40*(dt+1)
+                    --Executa um movimento e espera
+                    dt = coroutine.yield(2)
+                end
+                for i=1, 5 do
+                    posy = posy + 40*(dt+1)
+                    dt = coroutine.yield(2)
+                end
+                for i=1, 5 do
+                    posx = posx - 40*(dt+1)
+                    dt = coroutine.yield(2)
+                end
+                for i=1, 5 do
+                    posy = posy - 40*(dt+1)
+                    dt = coroutine.yield(2)
+                end
+            end
+        end
+
+        local bloco = {
+        coroutineBloco = coroutine.create(moveBloco),
+        
+        getX = function()
+            return posx
+        end,
+
+        getY = function()
+            return posy
+        end
+        }
+
+        return bloco
+    end
+
+    blocoExtra = criaNovoBloco()
+    
 end
 
 function love.update(dt)
@@ -25,18 +80,21 @@ function love.update(dt)
     criaInimigo(dt)
     movimenta()
     colisao()
+    co = coroutine.resume(blocoExtra.coroutineBloco, dt)
 end
 
 function love.draw()
-love.graphics.setColor(240, 240, 240)
+    love.graphics.setColor(240, 240, 240)
     love.graphics.polygon("fill", bloco.body:getWorldPoints(bloco.shape:getPoints()))
     for i, inimigo in ipairs(inimigos) do
+        love.graphics.setColor(153, 0, 51)
         love.graphics.polygon("fill", inimigo.body:getWorldPoints(bloco.shape:getPoints()))
     end
     love.graphics.setColor(72, 240, 100)
     love.graphics.print("Pontuação:", 5, 20)
     love.graphics.print(pontos, 100, 20)
-
+    
+    
     if perdas > 70 then
         love.graphics.setColor(72, 240, 100)
         love.graphics.print("Alerta", 5, 35)
@@ -49,16 +107,19 @@ love.graphics.setColor(240, 240, 240)
         perdas = 0
         bonus = 0
     end
+
+        love.graphics.setColor(153,153,255)
+        love.graphics.rectangle( "fill", blocoExtra.getX(), blocoExtra.getY(), 50, 30 )
 end
 
 function movimenta()
-if love.keyboard.isDown("a") then 
-    aceleracao = velocidade * 2
-else
-    aceleracao = velocidade
-end
+    if love.keyboard.isDown("a") then 
+        aceleracao = velocidade * 2
+    else
+        aceleracao = velocidade
+    end
 
-if love.keyboard.isDown("right") then 
+    if love.keyboard.isDown("right") then 
         if bloco.body:getX() < larguraDaTela then        
             bloco.body:setX(bloco.body:getX() + aceleracao)
         else

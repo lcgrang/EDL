@@ -159,18 +159,23 @@ function criaInimigo(dt)
         nRandom = math.random(10, love.graphics.getHeight())
         inimigo = {}
         inimigo.body = love.physics.newBody(world, love.graphics.getWidth() - 10, nRandom, "dynamic")
-        inimigo.shape = love.physics.newRectangleShape(50, 30)  
+        inimigo.shape = love.physics.newRectangleShape(150, 30)  
         inimigo.fixture = love.physics.newFixture(bloco.body, bloco.shape)
         table.insert(inimigos, inimigo)
     end
 
+    local removeInimigo = {}
     for i, inimigo in ipairs(inimigos) do
         inimigo.body:setX(inimigo.body:getX() - (170*dt))
         if inimigo.body:getX() < 0 then
-            table.remove(inimigos, i)
+            table.insert(removeInimigo, i)
             perdas = perdas + 1
         end
     end
+    --for i, inimigo in ipairs(removerInimigo) do
+      --  table.remove(removerInimigo, inimigo)
+    --end
+
 end
 
 function checaColisao(x1, y1, w1, h1, x2, y2, w2, h2)                  
