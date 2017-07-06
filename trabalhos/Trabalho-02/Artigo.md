@@ -246,6 +246,44 @@ func fib(x int) int {
 }
 ```
 
+
+<p>Canais são conexões entre gorrotinas. Um canal é um sistema de comunicação que permite uma gorrotina enviar valores para outra.
+Para criar um canal, é usada a função make.</p>
+
+<p>Nesse exemplo usando o conceito de gorrotinas e canais, a primeira gorrotina irá gerar números e enviá-los por um canal
+para outra gorrotina que irá fazer o cálculo do quadrado desses números. A gorrotina principal(executada na function main) irá receber o resultado e exibi-lo.
+Após o uso do canal de comunicação, pode ser útil fechá-lo após o uso, sabendo que não haja mais nenhuma informação a ser enviada.
+ </p>
+
+```go
+func main(){
+    //Cria dois canais para comunicação entre as gorrotinas
+    naturals := make(chan int)
+    squares := make(chan int)
+
+    go func (){
+        for x := 0; x < 100; x++ {
+            naturals <- x
+        }
+        //Fecha o canal naturals, o que fará terminar o loop da outra gorrotina
+        close(naturals)
+    }()
+
+    go func (){
+        for x := range in {
+            squares <- x * x
+        }
+        //Quando o canal naturals for fechado, terminará o loop e squares será fechado
+        close(squares)
+    }()
+
+    for x := range squares {
+        fmt.Println(x)
+    }    
+
+}
+```
+
 # Conclusão
 
 Go é uma linguagem focada em concorrência, então seu uso é indicado para projetos que necessitem de sistemas distribuídos.
